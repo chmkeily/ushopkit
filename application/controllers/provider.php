@@ -19,7 +19,8 @@ class Provider extends CI_Controller {
 	*  <pre>
 	*	接受的表单数据：
 	*		start_idx	列表开始下标
-	*		length		页大小/列表长度
+    *		length		页大小/列表长度
+    *		city        城市
 	*  </pre>
 	* @return 操作结果
 	*/
@@ -27,6 +28,7 @@ class Provider extends CI_Controller {
 	{
 		$offset		= trim($this->input->get_post('start_idx', TRUE));
 		$length		= trim($this->input->get_post('length', TRUE));
+		$city		= trim($this->input->get_post('city', TRUE));
 
 		if (!is_numeric($offset))
 		{
@@ -37,10 +39,16 @@ class Provider extends CI_Controller {
 			|| 1 > $length || 20 < $length)
 		{
 			$length = 10;
-		}
+        }
+
+        $filter = array();
+        if (!empty($city))
+        {
+            $filter['provider_location'] = $city;
+        }
 
 		$_RSP['ret'] = 0;
-		$providers = $this->provider_model->get_providers(array(), $length, $offset);
+		$providers = $this->provider_model->get_providers($filter, $length, $offset);
 		if (!empty($providers))
 		{
 			$_RSP['providers'] = $providers;
