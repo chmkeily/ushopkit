@@ -30,8 +30,10 @@ class Version extends CI_Controller {
 
 		if (empty($clientversion) ||$this->_CURRENT_VERSION > $clientversion)
 		{
-			$_RSP["ret"] = 1;
-			$_RSP["pkg"] = array("version" => $this->_CURRENT_VERSION, "url" => $this->_CURRENT_URL);
+            $_RSP["ret"] = 1;
+            $_RSP["verinfo"] = array("type" => 1,
+                "version" => $this->_CURRENT_VERSION,
+                "url" => $this->_CURRENT_URL);
 		}
 		else
 		{
