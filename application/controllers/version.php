@@ -22,7 +22,16 @@ class Version extends CI_Controller {
 	*  <pre>
 	*		ver		当前客户端版本号
 	*  </pre>
-	* @return 操作结果
+    * @return 操作结果
+    *    example: 
+    *    {
+    *       "ret":1,
+    *       "verinfo":{
+    *           "type":1,
+    *           "version":1,
+    *           "url":"http://ushopkit.com/cdn/ushopapp_v1.apk"
+    *       }
+    *    }
 	*/
 	public function index()
 	{
