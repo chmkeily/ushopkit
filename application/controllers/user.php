@@ -25,7 +25,7 @@ class User extends CI_Controller {
 	*  <pre>
 	*	测试账号: 
 	*		Email: ushopkit@gmail.com
-	*		秘 钥: C544CA1BFF546F6B7B8FED721CE22A4C (明文:ushopkit2015)
+	*		秘 钥: c61e12ee7656f8220bc0318344105c0f (明文:ushopkit2015)
 	*  </pre>
 	* @return 操作结果
 	*/
@@ -100,6 +100,11 @@ class User extends CI_Controller {
 			$_RSP['ret'] = 100;
 			$_RSP['msg'] = 'invalid email';
 			exit(json_encode($_RSP));
+		}
+
+		if (empty($name))
+		{
+			$name="user_" . time() % 9999;
 		}
 
 		$user = array(

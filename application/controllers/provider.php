@@ -53,7 +53,7 @@ class Provider extends CI_Controller {
 		{
 			$_RSP['providers'] = $providers;
 		}
-		
+
 		exit(json_encode($_RSP));
 	}
 

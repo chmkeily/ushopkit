@@ -95,7 +95,7 @@ class Auth {
 		}
 
 		$au_secret = md5($user['user_secret'] . $timestamp);
-		if ($secret2 !== $au_secret)
+		if (0 != strcasecmp($au_secret, $secret2))
 		{
 			return FALSE;	//密码/秘钥校验失败
 		}
@@ -118,5 +118,5 @@ class Auth {
 }
 // END Log Class
 
-/* End of file Log.php */
-/* Location: ./system/libraries/Log.php */
+/* End of file Auth.php */
+/* Location: ./application/libraries/Auth.php */
