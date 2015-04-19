@@ -1,4 +1,0 @@
-var searchData=
-[
-  ['_5f_5fconstruct',['__construct',['../class_base_ctrl.html#a65faca630a03d911d31c7862f2db37da',1,'BaseCtrl\__construct()'],['../class_coupon.html#aeae1b8c0e0b4ba341139e097edb90c71',1,'Coupon\__construct()'],['../class_favorite.html#a626706152ca3b9af3a449800819b6d71',1,'Favorite\__construct()'],['../class_message.html#a36a849169ea6e0494f6a59bcb84d6ece',1,'Message\__construct()'],['../class_product.html#ad109fb66198f9b631950e276875706cb',1,'Product\__construct()'],['../class_provider.html#ad22dd18cf56d7c20440102cb603a772b',1,'Provider\__construct()'],['../class_requirement.html#aa33254f4099a4489dcb7864957288af3',1,'Requirement\__construct()'],['../class_shopcase.html#a3c62d60b58a39e1767236bfde30ba446',1,'Shopcase\__construct()'],['../class_upload.html#a80a911da6d862b1a9b306f0ec54bd08d',1,'Upload\__construct()'],['../class_user.html#ab85808b180763aae0ad612ddac38f630',1,'User\__construct()']]]
-];
