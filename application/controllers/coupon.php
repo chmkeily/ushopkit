@@ -110,7 +110,75 @@ class Coupon extends CI_Controller {
 		}
 		
 		exit(json_encode($_RSP));
-	}
+    }
+
+	/**
+	* @brief 领取优惠劵
+	*  <pre>
+	*	接受的表单数据：
+	*		coupon_id	    优惠劵ID
+	*		coupon_desc	    简短描述
+	*  </pre>
+	* @return 操作结果
+	*/
+	public function pocket()
+	{
+		$couponid   = trim($this->input->get_post('coupon_id', TRUE));
+        $coupondesc = trim($this->input->get_post('coupon_desc', TRUE));
+
+        if (!is_numeric($couponid))
+        {
+            $_RSP['ret'] = ERR_INVALID_VALUE;
+            $_RSP['msg'] = 'invalid coupon id';
+            exit(json_encode($_RSP));
+        }
+
+		$this->load->library('auth');
+        $userid = $this->auth->get_userid();
+        if (null === $userid)
+        {
+            $_RSP['ret'] = ERR_NO_SESSION;
+			$_RSP['msg'] = 'not logined yet';
+			exit(json_encode($_RSP));
+        }
+
+        $coupon = $this->coupon_model->get_coupon_by_id($couponid);
+        if (false == $coupon)
+        {
+            $_RSP['ret'] = ERR_NO_OBJECT;
+            $_RSP['msg'] = 'no such coupon';
+            exit(json_encode($_RSP));
+        }
+
+        if (empty($coupondesc))
+        {
+            $coupondesc = $coupon['coupon_title'];
+        }
+
+        $timestamp = time();
+
+        $usr_coupon = array(
+            'coupon_couponid'   => $couponid,
+            'coupon_userid'     => $userid,
+            'coupon_desc'       => $coupondesc,
+            'coupon_obtaintime' => $timestamp,
+            'coupon_begintime'  => $coupon['coupon_begintime'],
+            'coupon_endtime'    => $coupon['coupon_endtime'],
+            'coupon_status'     => 0,
+        );
+
+        $id = $this->user_coupon_model->add($usr_coupon);
+        if (false === $id)
+        {
+            $_RSP['ret'] = ERR_DB_OPERATION_FAILED;
+            $_RSP['msg'] = 'system exception';
+            exit(json_encode($_RSP));
+        }
+
+        $_RSP['ret'] = SUCCEED;
+        exit(json_encode($_RSP));
+    }
+
 }
 
 /* End of file coupon.php */

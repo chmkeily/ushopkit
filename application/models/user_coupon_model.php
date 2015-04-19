@@ -8,7 +8,7 @@ class User_coupon_model extends CI_Model
             'coupon_userid'     => 'UserID',
             'coupon_couponid'   => 'CouponID',
             'coupon_status'     => 'Status',
-            'coupont_desc'      => 'CouponDesc',
+            'coupon_desc'      => 'CouponDesc',
             'coupon_obtaintime' => 'ObtainTime',
             'coupon_usetime'    => 'UseTime',
             'coupon_begintime'  => 'BeginTime',
