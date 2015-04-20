@@ -110,7 +110,7 @@ class User extends CI_Controller {
         if ($version == 2)
         {
             $this->load->library('encrypt');
-            $this->encrypt->private_decrypt($secret, $secret);
+            $this->encrypt->private_decrypt(base64_decode($secret), $secret);
         }
 
 		if (empty($name))
