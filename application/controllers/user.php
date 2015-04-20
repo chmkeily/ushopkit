@@ -25,7 +25,8 @@ class User extends CI_Controller {
 	*  <pre>
 	*	测试账号: 
 	*		Email: ushopkit@gmail.com
-	*		秘 钥: c61e12ee7656f8220bc0318344105c0f (明文:ushopkit2015)
+    *		秘 钥: c61e12ee7656f8220bc0318344105c0f (明文:ushopkit2015)
+    *
 	*  </pre>
 	* @return 操作结果
 	*/
@@ -78,7 +79,11 @@ class User extends CI_Controller {
 	*		name 				昵称
 	*		contact 			联系方式
 	*		version				API版本(可选)
-	*  </pre>
+    *  </pre>
+    *  <pre>
+    *		@2015-04-19
+    *		可设置version为2启用openssl_rsa公钥对secret进行加密 (公钥另行获取)
+    *  </pre>
 	*/
 	function register()
 	{
@@ -100,7 +105,13 @@ class User extends CI_Controller {
 			$_RSP['ret'] = 100;
 			$_RSP['msg'] = 'invalid email';
 			exit(json_encode($_RSP));
-		}
+        }
+
+        if ($version == 2)
+        {
+            $this->load->library('encrypt');
+            $this->encrypt->private_decrypt($secret, $secret);
+        }
 
 		if (empty($name))
 		{
