@@ -122,6 +122,7 @@ class User extends CI_Controller {
 			'user_email' 	=> $email,
 			'user_secret'	=> $secret,
 			'user_name'		=> $name,
+			'user_contact'	=> $contact,
 			'user_type'		=> 1,
 			'user_location'	=> 0
 			);
