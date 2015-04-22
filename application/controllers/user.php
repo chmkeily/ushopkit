@@ -124,7 +124,7 @@ class User extends CI_Controller {
 			'user_name'		=> $name,
 			'user_contact'	=> $contact,
 			'user_type'		=> 1,
-			'user_location'	=> 0
+			'user_location'	=> 101
 			);
 
 		$this->load->model('user_model');

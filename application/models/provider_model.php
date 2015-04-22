@@ -29,7 +29,7 @@ class Provider_model extends CI_Model
     //增加
     function add($provider)
     {
-        $row = XFORMAT($user, $this->FieldMatrix);
+        $row = XFORMAT($provider, $this->FieldMatrix);
         if(FALSE == $this->db->insert($this->TableName, $row))
         {   
             return FALSE;

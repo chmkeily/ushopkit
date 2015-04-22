@@ -5,7 +5,8 @@
 */
 class Upload extends CI_Controller {
 
-	private var $_ufile_dir = '/data/ussd/';
+    private var $_ufile_dir = '/data/ussd/';
+    private var $_ufile_internet_dir = '/cdn/';
 	
 	/**
 	* constructor
@@ -17,7 +18,9 @@ class Upload extends CI_Controller {
 
 	/**
 	* @brief 文件/图片上传接口（未定稿）
-	*
+    * <pre>
+    *   _ufile      上传文件所用参数名
+    * </pre>
 	*/
 	public function index()
 	{
