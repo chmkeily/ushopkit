@@ -68,7 +68,7 @@ class Shopcase extends CI_Controller {
             exit(json_encode($_RSP));
         }
 
-        $shopcase = $this->db->get_shopcases_by_id($shopcaseid);
+        $shopcase = $this->db->get_shopcase_by_id($shopcaseid);
         if (false === $shopcase)
         {
             $_RSP['ret'] = ERR_NO_OBJECT;
