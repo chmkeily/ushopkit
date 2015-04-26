@@ -39,7 +39,7 @@ class Shopcase extends CI_Controller {
             $length = 10;
         }
         
-        $shopcases = $this->shopcase_model->get_shopcase(array(), $length, $offset);
+        $shopcases = $this->shopcase_model->get_shopcases(array(), $length, $offset);
         if (!empty($shopcases))
         {
 		    $_RSP['shopcases'] = $shopcases;
