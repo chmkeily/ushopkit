@@ -143,7 +143,65 @@ class User extends CI_Controller {
 			'user_name'	=> $name,
 			);
 		exit(json_encode($_RSP));
-	}
+    }
+
+    /**
+     * @brief 修改个人信息
+     * <pre>
+     *  接受的表单参数:
+     *      name        用户昵称 (optional)
+     *      contact     联系方式 (optional)
+     *      city        所在城市编码 (optional)
+     * </pre>
+     * @return 操作结果
+     */
+    function update()
+    {
+		$name 		= trim($this->input->get_post('name', TRUE));
+		$contact	= trim($this->input->get_post('contact', TRUE));
+		$city	    = trim($this->input->get_post('city', TRUE));
+        
+        $this->load->library('auth');
+        $userid = $this->auth->get_userid();
+        if (null === $userid)
+        {
+            $_RSP['ret'] = ERR_NO_SESSION;
+            $_RSP['msg'] = 'not logined yet';
+            exit(json_encode($_RSP));
+        }
+
+        $updates = array();
+        if (!empty($name))
+        {
+            $updates['user_name'] = $name;
+        }
+        if (!empty($contact))
+        {
+            $updates['user_contact'] = $contact;
+        }
+        if (!empty($city))
+        {
+            $updates['user_location'] = $city;
+        }
+
+        if (empty($updates))
+        {
+            $_RSP['ret'] = ERR_MISSING_PARM;
+            $_RSP['msg'] = 'missing params';
+            exit(json_encode($_RSP));
+        }
+
+        $ret = $this->user_model->update($userid, $updates);
+        if (false === $ret)
+        {
+            $_RSP['ret'] = ERR_DB_OPERATION_FAILED;
+            $_RSP['msg'] = 'database exception';
+            exit(json_encode($_RSP));
+        }
+
+        $_RSP['ret'] = 0;
+        exit(json_encode($_RSP));
+    }
 }
 
 /* End of file welcome.php */

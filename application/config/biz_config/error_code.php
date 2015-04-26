@@ -9,6 +9,7 @@ define('ERR_FAILED',	-1);
 
 /* HTTP/CGI */
 define('ERR_INVALID_VALUE',				100);
+define('ERR_MISSING_PARAM',				101);
 define('ERR_MISSING_PARM',				101);
 
 /* users relative */
