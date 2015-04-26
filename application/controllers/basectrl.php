@@ -1,6 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-
+/**
+ * @brief 预设基础类
+ */
 class BaseCtrl extends CI_Controller {
 
 	/*

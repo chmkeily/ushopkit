@@ -81,7 +81,7 @@ class User extends CI_Controller {
 	*		version				API版本(可选)
     *  </pre>
     *  <pre>
-    *		@2015-04-19
+    *		@ 2015-04-19
     *		可设置version为2启用openssl_rsa公钥对secret进行加密 (公钥另行获取)
     *  </pre>
 	*/
