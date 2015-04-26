@@ -155,7 +155,7 @@ class Provider extends CI_Controller {
 		if (FALSE == $id)
 		{
 			$_RSP['ret'] = -1;
-			$_RSP['msg'] = 'ERROR_DB_OPERATION';
+			$_RSP['msg'] = 'Error: database exception';
 		}
 		else
 		{

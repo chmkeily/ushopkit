@@ -63,5 +63,20 @@ class User_model extends CI_Model
         }
 
         return XFORMAT($row, $this->FieldMatrix, FALSE);
-	}
+    }
+
+    /**
+     * @brief 更新信息
+     */
+    function update($userid, $updates = array());
+    {
+        $ufields = XFORMAT($updates, $this->FieldMatrix);
+        if (empty($ufields))
+        {
+            return false;
+        }
+
+        $this->db->where('ID', $userid)->update($this->TableName, $ufields);
+        return $this->db->affected_rows();
+    }
 }

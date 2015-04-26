@@ -9,8 +9,8 @@ class Shopcase_model extends CI_Model
             'shopcase_image'      => 'Image',
             'shopcase_intro'      => 'Intro',
             'shopcase_providerid' => 'ProviderID',
-            'shopcase_productNum' => 'ProductNum',
-            'shopcase_products'   => 'Products',
+            'shopcase_content'    => 'Content',
+            'shopcase_ctime'      => 'CreatedTime',
         );
 
     public function __construct()
@@ -38,6 +38,13 @@ class Shopcase_model extends CI_Model
     
     ///查询
     /**
+     * 选择摘要列
+     */
+    function select_abstract()
+    {
+        $this->db->select('ID,Name,Image,Intro,ProviderID,CreatedTIme');
+    }
+    /**
     * @return array or FALSE
     */
     function get_shopcase_by_id($shopcase_id)
@@ -56,6 +63,7 @@ class Shopcase_model extends CI_Model
     */
     function get_shopcases_by_providerid($providerid, $limit = 10, $offset = 0)
     {
+        $this->select_abstract();
         $rows = $this->db->where('ProviderID', $providerid)->get($this->TableName, $limit, $offset)->result_array();
         $shopcases = array();
         foreach ($rows as $row)
@@ -90,6 +98,7 @@ class Shopcase_model extends CI_Model
     */
     function get_shopcases($conditions, $limit = 10, $offset = 0)
     {
+        $this->select_abstract();
         $rows = $this->create_query($conditions)->get($this->TableName, $limit, $offset)->result_array();
         $shopcases = array();
         foreach ($rows as $row)
@@ -98,5 +107,20 @@ class Shopcase_model extends CI_Model
         }
 
         return $shopcases;
+    }
+
+    /**
+     * @brief 更新
+     */
+    function update($caseid, $updates = array())
+    {
+        $ufields = XFORMAT($updates, $this->FieldMatrix);
+        if (empty($ufields))
+        {
+            return false;
+        }
+
+        $this->db->where('ID', $caseid)->update($this->TableName, $ufields);
+        return $this->db->affected_rows();
     }
 }

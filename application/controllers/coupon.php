@@ -179,6 +179,31 @@ class Coupon extends CI_Controller {
         exit(json_encode($_RSP));
     }
 
+    /**
+     * @brief 详情查询
+     * <pre>
+     *  接受表单参数:
+     *      coupon_id   优惠劵详情
+     * </pre>
+     * @return 优惠劵详情
+     */
+    function details()
+    {
+        $couponid   = trim($this->input->get_post('coupon_id', TRUE));
+
+        $coupon = $this->coupon_model->get_coupon_by_id($couponid);
+        if (empty($coupon))
+        {
+            $_RSP['ret'] = ERR_NO_OBJECT;
+            $_RSP['msg'] = 'no such coupon';
+            exit(json_encode($_RSP));
+        }
+
+        $_RSP['ret']    = SUCCEED;
+        $_RSP['coupon'] = $coupon;
+        exit(json_encode($_RSP));
+    }
+
 }
 
 /* End of file coupon.php */

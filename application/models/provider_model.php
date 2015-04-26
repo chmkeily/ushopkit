@@ -96,34 +96,10 @@ class Provider_model extends CI_Model
     }
     
     ///更新
-    function create_updates($fields)
-    {
-        if (array_key_exists('provider_name', $fields))
-        {
-            $updates['Name'] = $fields['provider_name'];
-        }
-
-        if (array_key_exists('provider_contact', $fields))
-        {
-            $updates['Contact'] = $fields['provider_contact'];
-        }
-
-        /*$TABFIELDS = array('Name', 'Contact', 'Address', 'Location');
-        foreach ($TABFIELDS as $fieldname)
-        {
-            if (array_key_exists($fieldname, $fields))
-            {
-                $updates[$fieldname] = $fields[$fieldname];
-            }
-        }*/
-
-        return $updates;
-    }
-
     function update($provider_id, $data)
     {
         $this->db->where('ID', $provider_id);
-        $updates = $this->create_updates($data);
+        $updates = XFORMAT($data, $this->FieldMatrix);
         $this->db->update($this->TableName, $updates);
     }
 	
