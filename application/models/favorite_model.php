@@ -37,17 +37,17 @@ class Favorite_model extends CI_Model
 
     function create_query($conditions)
     {
-        if( !empty($data["favorite_userid"]) )
+        if( !empty($conditions["favorite_userid"]) )
         {
             $this->db->where('UserID', $data['favorite_userid']);
         }
 
-        if( !empty($data["favorite_type"]) )
+        if( !empty($conditions["favorite_type"]) )
         {
             $this->db->where('Type', $data['favorite_type']);
         }
 
-        if( !empty($data["favorite_referid"]) )
+        if( !empty($conditions["favorite_referid"]) )
         {
             $this->db->where('ReferID', $data['favorite_referid']);
         }
@@ -58,7 +58,7 @@ class Favorite_model extends CI_Model
     /**
      *
      */
-    function get_favorites($conditions)
+    function get_favorites($conditions, $limit = 10, $offset = 0)
     {
         $rows = $this->create_query($conditions)->get($this->TableName, $limit, $offset)->result_array();
         $favorites = array();

@@ -18,33 +18,68 @@ class Shopcase extends CI_Controller {
 	* @brief 案例查询
 	*  <pre>
 	*	接受的请求数据：
-	*		shopcase_id		店铺案例ID
+	*		start_idx		开始序号
+	*		length		列表长度
 	*  </pre>
 	* @return 操作结果
 	*/
 	public function index()
 	{
-		$shopcase_id = trim($this->input->get_post('shopcase_id', TRUE));
-		
-		if (!is_numeric($shopcase_id))
+		$offset		= trim($this->input->get_post('start_idx', TRUE));
+		$length		= trim($this->input->get_post('length', TRUE));
+        
+        if (!is_numeric($offset))
 		{
-			$_RSP['ret'] = ERR_INVALID_VALUE;
-			$_RSP['msg'] = 'invalid shopcase id';
-			exit(json_encode($_RSP));
+			$offset = 0;
 		}
 
-		$shopcase = $this->shopcase_model->get_shopcase_by_id($shopcase_id);
-		if (empty($shopcase))
+		if (!is_numeric($length)
+			|| 1 > $length || 20 < $length)
 		{
-			$_RSP['ret'] = ERR_NO_OBJECT;
-			$_RSP['msg'] = 'no such shopcase';
-			exit(json_encode($_RSP));
-		}
-		
+            $length = 10;
+        }
+        
+        $shopcases = $this->shopcase_model->get_shopcase(array(), $length, $offset);
+        if (!empty($shopcases))
+        {
+		    $_RSP['shopcases'] = $shopcases;
+        }
+
 		$_RSP['ret'] = SUCCEED;
-		$_RSP['shopcase'] = $shopcase;
 		exit(json_encode($_RSP));
 	}
+
+	/**
+	* @brief 案例查询
+	*  <pre>
+	*	接受的请求数据：
+	*		caseid		案例ID
+	*  </pre>
+	* @return 操作结果
+	*/
+	public function details()
+	{
+        $shopcaseid = trim($this->input->get_post('caseid', TRUE));
+
+        if (!is_numeric($shopcaseid))
+        {
+            $_RSP['ret'] = ERR_INVALID_VALUE;
+            $_RSP['msg'] = 'invalid case id';
+            exit(json_encode($_RSP));
+        }
+
+        $shopcase = $this->db->get_shopcases_by_id($shopcaseid);
+        if (false === $shopcase)
+        {
+            $_RSP['ret'] = ERR_NO_OBJECT;
+            $_RSP['msg'] = 'no such object';
+            exit(json_encode($_RSP));
+        }
+
+        $_RSP['ret'] = SUCCEED;
+        $_RSP['shopcase'] = $shopcase;
+        exit(json_encode($_RSP));
+    }
 
 	/**
 	* @brief 服务商案例查询

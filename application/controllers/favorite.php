@@ -71,7 +71,10 @@ class Favorite extends CI_Controller {
 	*		referid		对象id
 	*		userid		用户id (可选，默认为当前登陆用户)
 	*  </pre>
-	* @return 操作结果
+    * @return 操作结果
+    * <pre>
+    *   {"ret":0,"favorite_id":"1"}
+    * </pre>
 	*/
     public function check()
     {
@@ -134,7 +137,7 @@ class Favorite extends CI_Controller {
 				break;
 
 			case FAVORITE_SHOPCASE:
-				$this->pin_servicecase($userid, $referid);
+				$this->pin_shopcase($userid, $referid);
 				break;
 
 			case FAVORITE_PRODUCT:
@@ -199,10 +202,37 @@ class Favorite extends CI_Controller {
 	* @brief 收藏案例
 	*/
 	private function pin_shopcase($userid, $caseid)
-	{
-		$_RSP['ret'] = ERR_FAILED;
-		$_RSP['msg'] = 'cannot pin shop case yet';
-		exit(json_encode($_RSP));
+    {
+        $this->load->model('shopcase_model');
+        $shopcase = $this->shopcase_model->get_shopcase_by_id($caseid);
+        if (false === $shopcase)
+        {
+            $_RSP['ret'] = ERR_INVALIDE_OBJECT;
+            $_RSP['msg'] = 'no such shopcase';
+		    exit(json_encode($_RSP));
+        }
+        
+        $favorite = array(
+            'favorite_userid'   => $userid,
+            'favorite_type'     => FAVORITE_SHOPCASE,
+            'favorite_referid'  => $caseid,
+            'favorite_brief'    => $shopcase['shopcase_name'],
+            'favorite_ftime'    => time(),
+        );
+        
+        $id = $this->favorite_model->add($favorite);
+		if (FALSE === $id)
+		{
+			$_RSP['ret'] = ERR_DB_OPERATION_FAILED;
+			$_RSP['msg'] = 'ERROR_DB_OPERATION';
+		}
+		else
+		{
+			$_RSP['ret']        = SUCCEED;
+			$_RSP['favoriteid'] = $id;
+		}
+        
+        exit(json_encode($_RSP));
 	}
 
 	/**

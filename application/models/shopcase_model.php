@@ -52,11 +52,45 @@ class Shopcase_model extends CI_Model
     }
 
     /**
-    * @return array or FALSE
+    * @return array
     */
     function get_shopcases_by_providerid($providerid, $limit = 10, $offset = 0)
     {
         $rows = $this->db->where('ProviderID', $providerid)->get($this->TableName, $limit, $offset)->result_array();
+        $shopcases = array();
+        foreach ($rows as $row)
+        {
+            $shopcases[] = XFORMAT($row, $this->FieldMatrix, FALSE);
+        }
+
+        return $shopcases;
+    }
+
+    /**
+     * @return array
+     */
+    function create_query($conditions)
+    {
+        if( !empty($conditions["shopcase_id"]) )
+        {
+            $this->db->where('ID', $data['shopcase_id']);
+            return $this->db;
+        }
+
+        if( !empty($conditions["shopcase_providerid"]) )
+        {
+            $this->db->where('ProviderID', $data['shopcase_providerid']);
+        }
+
+        return $this->db;
+    }
+
+    /**
+    * @return array or FALSE
+    */
+    function get_shopcases($conditions, $limit = 10, $offset = 0)
+    {
+        $rows = $this->create_query($conditions)->get($this->TableName, $limit, $offset)->result_array();
         $shopcases = array();
         foreach ($rows as $row)
         {
