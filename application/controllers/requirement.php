@@ -67,7 +67,7 @@ class Requirement extends CI_Controller {
 	* @brief 添加服务商
 	*  <pre>
 	*	接受的表单数据：
-	*		requirement_type		需求类型
+	*		requirement_type		需求类型 (1:开店需求, 2:技术支持)
 	*		requirement_ownername	用户称呼
 	*		requirement_ownerphone	联系电话
 	*		requirement_shopcate	店铺类型

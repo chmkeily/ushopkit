@@ -69,25 +69,40 @@ class Favorite extends CI_Controller {
 	*	接受的表单数据：
 	*		type		收藏类型
 	*		referid		对象id
-	*		userid		用户id
+	*		userid		用户id (可选，默认为当前登陆用户)
 	*  </pre>
 	* @return 操作结果
 	*/
     public function check()
     {
-		$type		= trim($this->input->get_post('type', TRUE));
-		$referid	= trim($this->input->get_post('referid', TRUE));
-        $userid	= trim($this->input->get_post('referid', TRUE));
+		$type       = trim($this->input->get_post('type', TRUE));
+		$referid    = trim($this->input->get_post('referid', TRUE));
+        $userid	    = trim($this->input->get_post('referid', TRUE));
 
         if (empty($userid))
         {
-            $_RSP['ret'] = ERR_NO_SESSION;
-            $_RSP['msg'] = 'not logined yet';
+            //若userid参数留空，则默认取当前登陆用户
+     	    $this->load->library('auth');
+            $userid = $this->auth->get_userid();
+            if (null === $userid)
+            {
+                $_RSP['ret'] = ERR_NO_SESSION;
+                $_RSP['msg'] = 'not logined yet';
+                exit(json_encode($_RSP));
+            }
+        }
+
+        $favoriteid = $this->favorite_model->check_favorite($userid, $type, $referid);
+        if (false === $favoriteid)
+        {
+            $_RSP['ret'] = -1;
+            $_RSP['msg'] = 'not such favorite';
             exit(json_encode($_RSP));
         }
 
-
-
+        $_RSP['ret'] = 0;
+        $_RSP['favorite_id'] = $favoriteid;
+        exit(json_encode($_RSP));
     }
 
 	/**

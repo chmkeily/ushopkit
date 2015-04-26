@@ -35,13 +35,39 @@ class Favorite_model extends CI_Model
 		$this->db->where('ID', $favorite_id)->delete($this->TableName);
     }
 
+    function create_query($conditions)
+    {
+        if( !empty($data["favorite_userid"]) )
+        {
+            $this->db->where('UserID', $data['favorite_userid']);
+        }
+
+        if( !empty($data["favorite_type"]) )
+        {
+            $this->db->where('Type', $data['favorite_type']);
+        }
+
+        if( !empty($data["favorite_referid"]) )
+        {
+            $this->db->where('ReferID', $data['favorite_referid']);
+        }
+
+        return $this->db;
+    }
+
     /**
      *
      */
     function get_favorites($conditions)
     {
-
-        return null;
+        $rows = $this->create_query($conditions)->get($this->TableName, $limit, $offset)->result_array();
+        $favorites = array();
+        foreach ($rows as $row)
+        {
+            $favorites[] = XFORMAT($row, $this->FieldMatrix, FALSE);
+        }
+        
+        return $favorites;
     }
     
     ///查询
@@ -73,5 +99,19 @@ class Favorite_model extends CI_Model
         }
 
         return $favorites;
+    }
+
+    /**
+     * @return favorite id or false
+     */
+    function check_favorite($userid, $type, $referid)
+    {
+        $row = $this->db->where('UserID', $userid)->where('Type', $type)->where('ReferID', $referid)->get($this->TableName)->result_array();
+        if (empty($row))
+        {
+            return false;
+        }
+
+        return $row['ID'];
     }
 }

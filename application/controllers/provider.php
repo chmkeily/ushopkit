@@ -102,6 +102,7 @@ class Provider extends CI_Controller {
 	*	接受的表单数据：
 	*		provider_name			名称
 	*		provider_icon			图标URL
+	*		provider_license		营业执照URL
 	*		provider_location		城市
 	*		provider_address		联系地址
 	*		provider_contact		联系方式
@@ -117,6 +118,7 @@ class Provider extends CI_Controller {
 	{
 		$name		= trim($this->input->get_post('provider_name', TRUE));
 		$iconurl	= trim($this->input->get_post('provider_icon', TRUE));
+		$licenseurl	= trim($this->input->get_post('provider_license', TRUE));
 		$location	= trim($this->input->get_post('provider_location', TRUE));
 		$contact	= trim($this->input->get_post('provider_contact', TRUE));
 		$address	= trim($this->input->get_post('provider_address', TRUE));
@@ -124,11 +126,22 @@ class Provider extends CI_Controller {
 		$intro		= trim($this->input->get_post('provider_intro', TRUE));
 		$casenum	= trim($this->input->get_post('provider_casenum', TRUE));
 		$verified	= trim($this->input->get_post('provider_verified', TRUE));
-		$warrant	= trim($this->input->get_post('provider_warrant', TRUE));
+        $warrant	= trim($this->input->get_post('provider_warrant', TRUE));
+
+        if (!empty($iconurl) && 10 > strlen($iconurl))
+        {
+            $iconurl = '';
+        }
+
+        if (!empty($licenseurl) && 10 > strlen(licenseurl))
+        {
+            $licenseurl = '';
+        }
 
 		$provider = array(
 			'provider_name' 	=> $name,
 			'provider_icon'		=> $iconurl,
+			'provider_license'	=> $licenseurl,
 			'provider_location'	=> $location,
 			'provider_contact'	=> $contact,
 			'provider_address'	=> $address,

@@ -7,6 +7,7 @@ class Provider_model extends CI_Model
             'provider_id'       => 'ID',
             'provider_name'     => 'Name',
             'provider_icon'     => 'Icon',
+            'provider_license'  => 'License',
             'provider_location' => 'Location',
             'provider_contact'  => 'Contact',
             'provider_address'  => 'Address',
@@ -46,7 +47,6 @@ class Provider_model extends CI_Model
     ///查询
     function create_query($data)
     {
-
         if( !empty($data["provider_id"]) )
         {
             $this->db->where('ID', $data['provider_id']);
