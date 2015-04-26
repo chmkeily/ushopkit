@@ -77,7 +77,7 @@ class Favorite extends CI_Controller {
     {
 		$type       = trim($this->input->get_post('type', TRUE));
 		$referid    = trim($this->input->get_post('referid', TRUE));
-        $userid	    = trim($this->input->get_post('referid', TRUE));
+        $userid	    = trim($this->input->get_post('userid', TRUE));
 
         if (empty($userid))
         {
