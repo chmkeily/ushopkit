@@ -106,7 +106,7 @@ class Favorite_model extends CI_Model
      */
     function check_favorite($userid, $type, $referid)
     {
-        $row = $this->db->where('UserID', $userid)->where('Type', $type)->where('ReferID', $referid)->get($this->TableName)->result_array();
+        $row = $this->db->where('UserID', $userid)->where('Type', $type)->where('ReferID', $referid)->get($this->TableName)->row_array();
         if (empty($row))
         {
             return false;
