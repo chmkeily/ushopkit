@@ -61,7 +61,34 @@ class Favorite extends CI_Controller {
 		}
 		
 		exit(json_encode($_RSP));
-	}
+    }
+
+	/**
+	* @brief 用户收藏查询
+	*  <pre>
+	*	接受的表单数据：
+	*		type		收藏类型
+	*		referid		对象id
+	*		userid		用户id
+	*  </pre>
+	* @return 操作结果
+	*/
+    public function check()
+    {
+		$type		= trim($this->input->get_post('type', TRUE));
+		$referid	= trim($this->input->get_post('referid', TRUE));
+        $userid	= trim($this->input->get_post('referid', TRUE));
+
+        if (empty($userid))
+        {
+            $_RSP['ret'] = ERR_NO_SESSION;
+            $_RSP['msg'] = 'not logined yet';
+            exit(json_encode($_RSP));
+        }
+
+
+
+    }
 
 	/**
 	* @brief 收藏项目

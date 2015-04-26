@@ -16,5 +16,30 @@
             code:"beijing",
             desc:"北京",
         },
+        {
+            id:104,
+            code:"tianjin",
+            desc:"天津",
+        },
+        {
+            id:105,
+            code:"shanghai",
+            desc:"上海",
+        },
+        {
+            id:106,
+            code:"foshan",
+            desc:"佛山",
+        },
+        {
+            id:107,
+            code:"chengdu",
+            desc:"成都",
+        },
+        {
+            id:108,
+            code:"wuhan",
+            desc:"武汉",
+        }
     ]
 }

@@ -34,6 +34,15 @@ class Favorite_model extends CI_Model
     {
 		$this->db->where('ID', $favorite_id)->delete($this->TableName);
     }
+
+    /**
+     *
+     */
+    function get_favorites($conditions)
+    {
+
+        return null;
+    }
     
     ///查询
     /**

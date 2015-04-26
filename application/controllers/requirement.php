@@ -19,6 +19,7 @@ class Requirement extends CI_Controller {
 	*  <pre>
 	*	接受的表单数据：
 	*		userid		用户ID
+	*		type		需求类型
 	*		start_idx	列表开始下标
 	*		length		页大小/列表长度
 	*  </pre>
@@ -27,6 +28,7 @@ class Requirement extends CI_Controller {
 	public function index()
 	{
 		$userid		= trim($this->input->get_post('userid', TRUE));
+		$type		= trim($this->input->get_post('type', TRUE));
 		$offset		= trim($this->input->get_post('start_idx', TRUE));
 		$length		= trim($this->input->get_post('length', TRUE));
 
@@ -41,8 +43,18 @@ class Requirement extends CI_Controller {
 			$length = 10;
 		}
 
-		$_RSP['ret'] = 0;
-		$requirements = $this->requirement_model->get_requirements(array("user_id" => $userid), $length, $offset);
+        $conditions = array();
+        if (!empty($userid))
+        {
+            $conditions['requirement_ownerid'] = $userid;
+        }
+        if (!empty($type))
+        {
+            $conditions['requirement_type'] = $type;
+        }
+
+        $_RSP['ret'] = 0;
+		$requirements = $this->requirement_model->get_requirements($conditions, $length, $offset);
 		if (!empty($requirements))
 		{
 			$_RSP['requirements'] = $requirements;
@@ -81,7 +93,7 @@ class Requirement extends CI_Controller {
 		$detail		= trim($this->input->get_post('requirement_detail', TRUE));
 		$expireT	= trim($this->input->get_post('requirement_et', TRUE));
 
-		if (empty($type) || empty($title) || empty($detail))
+		if (empty($type) || empty($ownername) || empty($title) || empty($detail))
 		{
 			$_RSP['ret'] = ERR_MISSING_PARM;
 			$_RSP['msg'] = 'missing param(s)';
