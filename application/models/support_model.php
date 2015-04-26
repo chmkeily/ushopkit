@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * @deprecated
+ */
 class Support_model extends CI_Model
 {
 	var $TableName = 'tb_support';

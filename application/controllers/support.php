@@ -1,8 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
-* @brief 技术支持
-*/
+ * @brief 技术支持需求(deprecated)
+ * @deprecated
+ */
 class Support extends CI_Controller {
 	
 	/**
