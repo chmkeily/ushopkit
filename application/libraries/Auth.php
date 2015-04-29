@@ -45,8 +45,9 @@ class Auth {
 	* @brief Set session - expires in x mins
 	*/
 	function set_session($user_data)
-	{
-		session_cache_expire(2);	//1小时
+    {
+        session_cache_limiter('private');
+		session_cache_expire(60);	//1小时
 		session_start();
 		$_SESSION['user_data'] = $user_data;
 	}
