@@ -48,7 +48,7 @@
             $('#login_btn').bind('click', function(){
                 var account = $('#usr_account').val();
                 var password = $('#usr_passwd').val();
-                var requrl = g_apihost + "/index.php/cms/user/login?email=" + account + "&secret=" + password + "&timestamp=" + 1430462931;
+                var requrl = "/index.php/cms/user/login?email=" + account + "&secret=" + password + "&timestamp=" + 1430462931;
 
                 var htmlobj = $.ajax({
                     url:requrl,
