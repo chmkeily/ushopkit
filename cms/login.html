@@ -50,12 +50,30 @@
                 var password = $('#usr_passwd').val();
                 var requrl = "/index.php/cms/user/login?email=" + account + "&secret=" + password + "&timestamp=" + 1430462931;
 
-                var htmlobj = $.ajax({
+				//#1
+				$.getJSON(requrl, function(rsp){
+					alert(rsp.ret);
+				});
+
+				//#2
+				/*$.ajax({
+					url:requrl,
+					//async:false,
+					dataType:"json",
+					success: function(rsp){
+						alert(rsp);
+						alert(rsp.ret);
+					}
+				});*/
+
+				//#3
+                /*var htmlobj = $.ajax({
                     url:requrl,
-                    async:false
+                    async:false,
+					dataType:'json'
                 });
-                var jsonrsp = htmlobj.responseText;
-                alter(jsonrsp.ret);
+				var jsonobj = eval("(" + htmlobj.responseText + ")");
+				alert(jsonobj.ret);*/
             });
         });
     </script>
