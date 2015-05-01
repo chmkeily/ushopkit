@@ -48,8 +48,14 @@
             $('#login_btn').bind('click', function(){
                 var account = $('#usr_account').val();
                 var password = $('#usr_passwd').val();
-                location.href = g_apihost + "/index.php/cms/user/login?email=" + account + "&secret=" + password
-                                + "&timestamp=" + 1430462931;
+                var requrl = g_apihost + "/index.php/cms/user/login?email=" + account + "&secret=" + password + "&timestamp=" + 1430462931;
+
+                var htmlobj = $.ajax({
+                    url:requrl,
+                    async:false
+                });
+                var jsonrsp = htmlobj.responseText;
+                alter(jsonrsp.ret);
             });
         });
     </script>
