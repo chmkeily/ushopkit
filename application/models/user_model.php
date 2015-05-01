@@ -68,7 +68,7 @@ class User_model extends CI_Model
     /**
      * @brief 更新信息
      */
-    function update($userid, $updates = array());
+    function update($userid, $updates = array())
     {
         $ufields = XFORMAT($updates, $this->FieldMatrix);
         if (empty($ufields))
