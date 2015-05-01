@@ -26,8 +26,8 @@
                 </div>
                 <div class="right">
                     <div class="login">
-                        <div class="input_div">用户名 <input type="text" /></div>
-                        <div class="input_div">密&nbsp;码 <input type="password" /></div>
+                        <div class="input_div">用户名 <input id="usr_account" type="text" /></div>
+                        <div class="input_div">密&nbsp;码 <input id="usr_passwd" type="password" /></div>
                         <div style="padding-left:50px; padding-top: 10px;">&nbsp;&nbsp;&nbsp; <input id="login_btn" type="button" value="登 录" style="padding: 5px 10px; font-size: 14px; cursor: pointer;" /></div>
                     </div>
                 </div>
@@ -46,7 +46,10 @@
     <script>
         $(document).ready(function(){
             $('#login_btn').bind('click', function(){
-                location.href = g_apihost + "/cms/user/login";
+                var account = $('#usr_account').val();
+                var password = $('#usr_passwd').val();
+                location.href = g_apihost + "/index.php/cms/user/login?email=" + account + "&secret=" + password
+                                + "&timestamp=" + 1430462931;
             });
         });
     </script>
