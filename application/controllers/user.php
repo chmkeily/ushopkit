@@ -230,6 +230,7 @@ class User extends CI_Controller {
             $_RSP['msg'] = 'no such user';
             exit(json_encode($_RSP));
         }
+        unset($user['user_secret']);
 
         $_RSP['ret'] = 0;
         $_RSP['user'] = $user;
