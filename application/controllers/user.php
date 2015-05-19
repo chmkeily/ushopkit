@@ -222,6 +222,7 @@ class User extends CI_Controller {
             exit(json_encode($_RSP));
         }
 
+		$this->load->model('user_model');
         $user = $this->user_model->get_user_by_id($userid);
         if (empty($user))
         {
