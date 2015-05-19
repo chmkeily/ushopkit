@@ -202,6 +202,38 @@ class User extends CI_Controller {
         $_RSP['ret'] = 0;
         exit(json_encode($_RSP));
     }
+
+    /**
+     * @brief 获取用户个人信息
+     * <pre>
+     *  参数列表：
+     *      userid      用户id
+     * </pre>
+     *
+     * @return 请参加具体的返回结果
+     */
+    function profile()
+    {
+        $userid = trim($this->input->get_post('userid', TRUE));
+        if (!is_numeric($userid))
+        {
+            $_RSP['ret'] = ERR_INVALID_VALUE;
+            $_RSP['msg'] = 'invalid userid';
+            exit(json_encode($_RSP));
+        }
+
+        $user = $this->user_model->get_user_by_id($userid);
+        if (empty($user))
+        {
+            $_RSP['ret'] = ERR_NO_OBJECT;
+            $_RSP['msg'] = 'no such user';
+            exit(json_encode($_RSP));
+        }
+
+        $_RSP['ret'] = 0;
+        $_RSP['user'] = $user;
+        exit(json_encode($_RSP));
+    }
 }
 
 /* End of file user.php */

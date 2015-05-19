@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
-* @brief 用户信息
+* @brief 消息系统
 */
 class Message extends CI_Controller {
 	
