@@ -25,7 +25,7 @@ class Coupon extends CI_Controller {
 	*  </pre>
 	* @return 操作结果
 	*/
-	public function index()
+	public function mine()
 	{
 		$offset		= trim($this->input->get_post('start_idx', TRUE));
 		$length		= trim($this->input->get_post('length', TRUE));
@@ -65,26 +65,25 @@ class Coupon extends CI_Controller {
 	}
 
 	/**
-	* @brief 服务商优惠卷查询
+	* @brief 优惠卷查询
 	*  <pre>
 	*	接受的表单数据：
-	*		provider_id	服务商ID
+	*		provider_id	服务商ID (optional)
 	*		start_idx	列表开始下标
 	*		length		页大小/列表长度
 	*  </pre>
 	* @return 操作结果
 	*/
-	public function provider_coupon()
+	public function index()
 	{
 		$providerid = trim($this->input->get_post('provider_id', TRUE));
 		$offset		= trim($this->input->get_post('start_idx', TRUE));
 		$length		= trim($this->input->get_post('length', TRUE));
 
-		if (!is_numeric($providerid))
+		$conditions = array();
+		if (!empty($providerid) && is_numeric($providerid))
 		{
-			$_RSP['ret'] = ERR_INVALID_VALUE;
-			$_RSP['msg'] = 'invalid provider id';
-			exit(json_encode($_RSP));
+			$conditions['provider_id'] = $providerid;
 		}
 
 		if (!is_numeric($offset))
@@ -99,7 +98,7 @@ class Coupon extends CI_Controller {
 		}
 
 		$_RSP['ret'] = 0;
-		$coupons = $this->coupon_model->get_coupons_by_providerid($providerid, $length, $offset);
+		$coupons = $this->coupon_model->get_coupons($conditions, $length, $offset);
 		if (!empty($coupons))
 		{
 			$_RSP['coupons'] = $coupons;

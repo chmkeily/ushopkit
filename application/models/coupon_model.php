@@ -50,12 +50,17 @@ class Coupon_model extends CI_Model
         return XFORMAT($row, $this->FieldMatrix, FALSE);
     }
 
-    /**
+	/**
     * @return array or FALSE
     */
-    function get_coupons_by_providerid($providerid, $limit = 10, $offset = 0)
+    function get_coupons($conditions = array(), $limit = 10, $offset = 0)
     {
-        $rows = $this->db->where('ProviderID', $providerid)->get($this->TableName, $limit, $offset)->result_array();
+		if (!empty($conditions['provider_id']) && is_numeric($conditions['provider_id']))
+		{
+			$this->db->where('ProviderID', $conditions['provider_id']);
+		}
+
+        $rows = $this->db->get($this->TableName, $limit, $offset)->result_array();
         $coupons = array();
         foreach ($rows as $row)
         {

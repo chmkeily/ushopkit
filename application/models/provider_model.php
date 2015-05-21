@@ -76,7 +76,7 @@ class Provider_model extends CI_Model
     */
     function get_providers($conditions = array(), $limit = 10, $offset = 0)
     {
-        $this->db->select('ID,Name,Icon,Location,Contact,Brief,Rating,CaseNum,Verified,Warranted');
+        $this->db->select('ID,Name,Icon,Location,Address,Contact,Brief,Rating,CaseNum,Verified,Warranted');
 		$conditions['order_by'] = 'Rating DESC';
 		$rows = $this->create_query($conditions)->get($this->TableName, $limit, $offset)->result_array();
 
