@@ -4,12 +4,13 @@ class Coupon_model extends CI_Model
 {
 	var $TableName = 'tb_coupon';
     var $FieldMatrix = array(
-            'coupon_id'         => 'ID',
-            'coupon_providerid' => 'ProviderID',
-            'coupon_title'      => 'Title',
-            'coupon_content'    => 'Content',
-            'coupon_begintime'  => 'BeginTime',
-            'coupon_endtime'    => 'EndTime',
+            'coupon_id'             => 'ID',
+            'coupon_providerid'     => 'ProviderID',
+            'coupon_providername'   => 'ProviderName',
+            'coupon_title'          => 'Title',
+            'coupon_content'        => 'Content',
+            'coupon_begintime'      => 'BeginTime',
+            'coupon_endtime'        => 'EndTime',
         );
 
     public function __construct()
