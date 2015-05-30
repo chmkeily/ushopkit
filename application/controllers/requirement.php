@@ -93,7 +93,7 @@ class Requirement extends CI_Controller {
 		$detail		= trim($this->input->get_post('requirement_detail', TRUE));
 		$expireT	= trim($this->input->get_post('requirement_et', TRUE));
 
-		if (empty($type) || empty($ownername) || empty($title) || empty($detail))
+		if (empty($type) || empty($ownername) || empty($title)) //|| empty($detail))
 		{
 			$_RSP['ret'] = ERR_MISSING_PARM;
 			$_RSP['msg'] = 'missing param(s)';
