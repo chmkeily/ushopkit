@@ -270,7 +270,42 @@ class Favorite extends CI_Controller {
 		}
 
 		exit(json_encode($_RSP));
-	}
+    }
+
+    /**
+	* @brief 取消收藏
+	*  <pre>
+	*	接受的表单数据：
+	*		favoriteid		收藏ID
+    *  </pre>
+    * @return {ret:0表示取消成功, 其他表示取消失败}
+	*/
+    public function unpin()
+    {
+        $favoriteid	= trim($this->input->get_post('favoriteid', TRUE));
+
+        if (empty($favoriteid) || !is_numeric($favoriteid))
+        {
+            $_RSP['ret'] = ERR_INVALIDE_OBJECT;
+            $_RSP['msg'] = 'invalid favorite id';
+            exit(json_encode($_RSP));
+        }
+
+		$this->load->library('auth');
+		$userid = $this->auth->get_userid();
+		if (null === $userid)
+		{
+			$_RSP['ret'] = ERR_NO_SESSION;
+			$_RSP['msg'] = 'not logined yet';
+			exit(json_encode($_RSP));
+        }
+
+        $this->favorite_model->remove($favoriteid);
+
+        $_RSP['ret'] = 0;
+		exit(json_encode($_RSP));
+    }
+	
 }
 
 /* End of file coupon.php */
