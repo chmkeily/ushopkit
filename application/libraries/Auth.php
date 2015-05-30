@@ -47,7 +47,7 @@ class Auth {
 	function set_session($user_data)
     {
         session_cache_limiter('private');
-		session_cache_expire(60);	//1小时
+		session_cache_expire(10080);	//1周
 		session_start();
 		$_SESSION['user_data'] = $user_data;
 	}
