@@ -81,7 +81,6 @@ class Requirement_model extends CI_Model
     */
     function get_requirements($conditions, $limit, $offset)
     {
-        $conditions = XFORMAT($conditions, $this->FieldMatrix);
         $conditions['order_by'] = 'ExpiredTime ASC';
         $rows = $this->create_query($conditions)->get($this->TableName, $limit, $offset)->result_array();
 
