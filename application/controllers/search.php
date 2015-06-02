@@ -42,9 +42,9 @@ class Search extends CI_Controller {
             foreach ($providers as $provider)
             {
                 $entries[] = array(
-                    'type'  = 1,
-                    'id'    = $provider['provider_id'],
-                    'info'  = $provider['provider_name']
+                    'type'  => 1,
+                    'id'    => $provider['provider_id'],
+                    'info'  => $provider['provider_name']
                 );
             }
 
