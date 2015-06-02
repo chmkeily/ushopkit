@@ -116,7 +116,7 @@ class Provider_model extends CI_Model
     function get_providers_by_keyword($keyword, $limit = 10)
     {
         $rows = $this->db->query('select ID,Name,Icon from '. $this->TableName
-                                .' where Name like "%'. $keyword '%" limit ' . $limit)->result_array();
+                                .' where Name like "%'. $keyword .'%" limit ' . $limit)->result_array();
 
         $items = array();
         foreach ($rows as $row)
