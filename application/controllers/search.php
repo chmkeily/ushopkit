@@ -44,7 +44,7 @@ class Search extends CI_Controller {
                 $entries[] = array(
                     'type'  = 1,
                     'id'    = $provider['provider_id'],
-                    'info'  = $provider['provider_name'];
+                    'info'  = $provider['provider_name']
                 );
             }
 
