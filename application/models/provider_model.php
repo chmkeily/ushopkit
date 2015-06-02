@@ -1,5 +1,4 @@
-<?php
-
+<?php 
 class Provider_model extends CI_Model
 {
 	var $TableName = 'tb_provider';
@@ -112,5 +111,19 @@ class Provider_model extends CI_Model
         }
 
         return XFORMAT($row, $this->FieldMatrix, FALSE);
-	}
+    }
+
+    function get_providers_by_keyword($keyword, $limit = 10)
+    {
+        $rows = $this->db->query('select ID,Name,Icon from '. $this->TableName
+                                .' where Name like \"'. $keyword '\" limit ' . $limit)->result_array();
+
+        $items = array();
+        foreach ($rows as $row)
+        {
+            $items[] = XFORMAT($row, $this->FieldMatrix, FALSE);
+        }
+
+        return $items;
+    }
 }
