@@ -151,7 +151,7 @@ class Coupon extends CI_Controller {
 
         if (empty($coupondesc))
         {
-            $coupondesc = $coupon['coupon_title'];
+            $coupondesc = $coupon['coupon_content'];
         }
 
         $timestamp = time();
@@ -159,6 +159,7 @@ class Coupon extends CI_Controller {
         $usr_coupon = array(
             'coupon_couponid'   => $couponid,
             'coupon_userid'     => $userid,
+            'coupon_title'      => $coupon['coupon_title'],
             'coupon_desc'       => $coupondesc,
             'coupon_obtaintime' => $timestamp,
             'coupon_begintime'  => $coupon['coupon_begintime'],
