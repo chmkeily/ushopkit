@@ -8,6 +8,7 @@ class Requirement_model extends CI_Model
             'requirement_ownerid'       => 'OwnerID',
             'requirement_ownername'     => 'OwnerName',
             'requirement_ownerphone'    => 'OwnerPhone',
+            'requirement_providerid'    => 'ProviderID',
             'requirement_type'          => 'Type',
             'requirement_shopcate'      => 'ShopCategory',
             'requirement_shoparea'      => 'ShopArea',
