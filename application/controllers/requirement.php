@@ -64,7 +64,7 @@ class Requirement extends CI_Controller {
 	}
 
 	/**
-	* @brief 添加服务商
+	* @brief 添加需求
 	*  <pre>
 	*	接受的表单数据：
 	*		requirement_type		需求类型 (1:开店需求, 2:技术支持)
@@ -145,5 +145,5 @@ class Requirement extends CI_Controller {
 	}
 }
 
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
+/* End of file requirement.php */
+/* Location: ./application/controllers/requirement.php */

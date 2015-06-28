@@ -175,6 +175,9 @@ class Coupon extends CI_Controller {
             exit(json_encode($_RSP));
         }
 
+        //增加此优惠劵的领取计数
+        $this->coupon_model->update_taken_count($couponid, 1);
+
         $_RSP['ret'] = SUCCEED;
         exit(json_encode($_RSP));
     }
