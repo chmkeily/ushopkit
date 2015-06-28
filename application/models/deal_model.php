@@ -1,5 +1,9 @@
 <?php
 
+/**
+* @brief 我都忘了当初设计这个类具体是用来干嘛的了⊙﹏⊙b汗
+*        有点像是工作流操作记录，不过目前看这个类还没用被使用 hiahia
+*/
 class Deal_model extends CI_Model
 {
 	var $TableName = 'tb_deal';
