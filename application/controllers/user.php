@@ -139,7 +139,7 @@ class User extends CI_Controller {
 		unset($user['user_secret']);
 		$_RSP['ret'] = 0;
 		$_RSP['user'] = array(
-			'userr_id'	=> $id,
+			'user_id'	=> $id,
 			'user_name'	=> $name,
 			);
 		exit(json_encode($_RSP));
