@@ -81,13 +81,13 @@ class Shopcase_model extends CI_Model
     {
         if( !empty($conditions["shopcase_id"]) )
         {
-            $this->db->where('ID', $data['shopcase_id']);
+            $this->db->where('ID', $conditions['shopcase_id']);
             return $this->db;
         }
 
         if( !empty($conditions["shopcase_providerid"]) )
         {
-            $this->db->where('ProviderID', $data['shopcase_providerid']);
+            $this->db->where('ProviderID', $conditions['shopcase_providerid']);
         }
 
         return $this->db;

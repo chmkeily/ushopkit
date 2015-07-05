@@ -18,8 +18,9 @@ class Shopcase extends CI_Controller {
 	* @brief 案例查询
 	*  <pre>
 	*	接受的请求数据：
-	*		start_idx		开始序号
-	*		length		列表长度
+	*		start_idx		开始序号 (默认值:0)
+	*		length		    列表长度 (默认值:10)
+	*		providerid		服务商ID (可选)
 	*  </pre>
 	* @return 操作结果
 	*/
@@ -27,19 +28,25 @@ class Shopcase extends CI_Controller {
 	{
 		$offset		= trim($this->input->get_post('start_idx', TRUE));
 		$length		= trim($this->input->get_post('length', TRUE));
+		$providerid	= trim($this->input->get_post('providerid', TRUE));
         
         if (!is_numeric($offset))
 		{
 			$offset = 0;
 		}
-
 		if (!is_numeric($length)
 			|| 1 > $length || 20 < $length)
 		{
             $length = 10;
         }
+
+        $conditions = array();
+        if (is_numeric($providerid))
+        {
+            $conditions['shopcase_providerid'] = $providerid;
+        }
         
-        $shopcases = $this->shopcase_model->get_shopcases(array(), $length, $offset);
+        $shopcases = $this->shopcase_model->get_shopcases($conditions, $length, $offset);
         if (!empty($shopcases))
         {
 		    $_RSP['shopcases'] = $shopcases;
