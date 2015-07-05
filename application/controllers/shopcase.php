@@ -89,7 +89,8 @@ class Shopcase extends CI_Controller {
     }
 
 	/**
-	* @brief 服务商案例查询
+	* @brief 服务商案例查询 (已废弃，请使用index接口+服务商id参数)
+    * @deprecated
 	*  <pre>
 	*	接受的请求数据：
 	*		providerid		服务商ID
