@@ -43,5 +43,19 @@ if ( ! function_exists('XFORMAT'))
 	}
 }
 
+/**
+* XGETVAL
+*	安全的值获取函数
+* @param mixed - $val
+* @return mixed 参数的值，当参数为空时返回''。
+*/
+if ( ! function_exists('XGETVAL'))
+{
+	function XGETVAL(&$val)
+	{
+		return (isset($val) ? ($val) : '');
+	}
+}
+
 /* End of file ukit_helper.php */
 /* Location: ./application/helpers/ukit_helper.php */
