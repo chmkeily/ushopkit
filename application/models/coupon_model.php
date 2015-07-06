@@ -8,6 +8,7 @@ class Coupon_model extends CI_Model
             'coupon_providerid'     => 'ProviderID',
             'coupon_providername'   => 'ProviderName',
             'coupon_title'          => 'Title',
+            'coupon_icon'           => 'Icon',
             'coupon_content'        => 'Content',
             'coupon_begintime'      => 'BeginTime',
             'coupon_status'         => 'Status',
