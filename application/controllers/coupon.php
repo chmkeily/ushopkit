@@ -179,6 +179,7 @@ class Coupon extends CI_Controller {
         $this->coupon_model->update_taken_count($couponid, 1);
 
         $_RSP['ret'] = SUCCEED;
+        $_RSP['ucid'] = $id;
         exit(json_encode($_RSP));
     }
 
@@ -186,13 +187,13 @@ class Coupon extends CI_Controller {
      * @brief 使用优惠劵
      * <pre>
      *  接受表单参数:
-     *      coupon_id   优惠劵ID
+     *      ucid   玩家领取的优惠劵记录ID(mine接口中返回的coupon_id，注意不是coupon_couponid)
      * </pre>
      * @return 优惠劵详情
      */
     function redeem()
     {
-        $couponid   = trim($this->input->get_post('coupon_id', TRUE));
+        $ucid   = trim($this->input->get_post('ucid', TRUE));
 
 		$this->load->library('auth');
         $userid = $this->auth->get_userid();
@@ -203,6 +204,46 @@ class Coupon extends CI_Controller {
 			exit(json_encode($_RSP));
         }
 
+        $coupon = $this->user_coupon_model->get_coupon_by_id($ucid);
+        if (false === $coupon)
+        {
+        	$_RSP['ret'] = ERR_NO_OBJECT;
+        	$_RSP['msg'] = 'no such cuopon';
+        	exit(json_encode($_RSP));
+        }
+
+        /**
+        * 已领取优惠劵的状态：
+        *  0	未使用
+        *  1 	已使用
+        *  2 	已失效/过期
+        */
+        if (0 != $coupon['coupon_status'])
+        {
+        	$_RSP['ret'] = ERR_IMPROPER_STATUS;
+        	$_RSP['msg'] = '优惠劵已使用或已失效';
+        	exit(json_encode($_RSP));
+        }
+
+        if ($userid != $coupon['coupon_userid'])
+        {
+        	$_RSP['ret'] = ERR_NO_PERMISSION;
+        	$_RSP['msg'] = '你无权使用此优惠劵';
+        	exit(json_encode($_RSP));
+        }
+
+        $updates = array('coupon_status' => 1);
+        if (0 < $this->user_coupon_model->update($ucid, $updates))
+        {
+        	$_RSP['ret'] = SUCCEED;
+        }
+        else
+        {
+        	$_RSP['ret'] = ERR_DB_OPERATION_FAILED;
+        	$_RSP['msg'] = '状态更新失败';
+        }
+
+        exit(json_encode($_RSP));
 	}
 
     /**

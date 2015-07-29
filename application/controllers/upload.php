@@ -5,8 +5,9 @@
 */
 class Upload extends CI_Controller {
 
-    private var $_ufile_dir = '/data/ussd/';
-    private var $_ufile_internet_dir = '/cdn/';
+    private var $_ufile_dir = '/data/ussd/img/u/';
+    private var $_ufile_path = '/img/u/';
+    private var $_ufile_domain = 'http://api.diaozhibao.com.cn/';
 	
 	/**
 	* constructor
@@ -32,9 +33,10 @@ class Upload extends CI_Controller {
 			exit(json_encode($_RSP));
 		}
 
+		$datestr = date('Y-m-d');
+		$ldir = $this->_ufile_dir . '/' . $datestr;
+		$lfname = 'uimg_' . date('YmdHis') . '_' . (rand() % 100);
 		$fileinfos = pathinfo($userfile['name']);
-		$ldir = $this->_ufile_dir . '/' . date('Y-m-d');
-		$lfname = date('YmdHis') . '_' . (rand() % 100);
 		if (!empty($fileinfos['extension']))
 		{
 			$lfname .= '.' . $fileinfos['extension'];
@@ -56,7 +58,7 @@ class Upload extends CI_Controller {
 		}
 
 		$_RSP['ret']	= 0;
-		$_RSP['path']	= $lfile;
+		$_RSP['url']	= $this->_ufile_domain . $this->_ufile_path . $datestr . '/' . $lfname;
 		exit(json_encode($_RSP));
 	}
 }

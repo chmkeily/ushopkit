@@ -34,18 +34,19 @@ class User_coupon_model extends CI_Model
         return $this->db->insert_id();
     }
     
-    function remove($coupon_id)
+    function remove($id)
     {
-		$this->db->where('ID', $coupon_id)->delete($this->TableName);
+		$this->db->where('ID', $id)->delete($this->TableName);
     }
     
     ///查询
     /**
+    * @brief 根据记录ID获取所领取的优惠劵信息
     * @return array or FALSE
     */
-    function get_coupon_by_id($coupon_id)
+    function get_coupon_by_id($id)
     {
-        $row = $this->db->where('ID', $coupon_id)->get($this->TableName)->row_array();
+        $row = $this->db->where('ID', $id)->get($this->TableName)->row_array();
         if (empty($row))
         {
             return FALSE;
@@ -67,5 +68,18 @@ class User_coupon_model extends CI_Model
         }
 
         return $coupons;
+    }
+
+    /**
+    * @brief 更新优惠劵属性值
+    * @return 返回成功更新的行数
+    */
+    function update($id, $updates)
+    {
+        $updatefields = XFORMAT($updates, $this->FieldMatrix);
+        $this->db->where('ID', $id);
+        $this->db->update($this->TableName, $updatefields);
+
+        return $this->db->affected_rows();
     }
 }

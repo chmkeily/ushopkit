@@ -100,6 +100,8 @@ class Provider_model extends CI_Model
         $this->db->where('ID', $provider_id);
         $updates = XFORMAT($data, $this->FieldMatrix);
         $this->db->update($this->TableName, $updates);
+
+        return $this->db->affected_rows();
     }
 	
 	function get_provider_by_id($provider_id)

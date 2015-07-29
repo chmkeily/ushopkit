@@ -21,6 +21,7 @@ define('ERR_FORBIDDEN',					503);
 /* business logic */
 define('ERR_INVALID_OBJECT',			600);
 define('ERR_NO_OBJECT',					601);
+define('ERR_IMPROPER_STATUS',			602);
 
 /* database */
 define('ERR_DB_OPERATION_FAILED',		1000);
