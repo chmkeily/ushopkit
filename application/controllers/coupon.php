@@ -182,11 +182,34 @@ class Coupon extends CI_Controller {
         exit(json_encode($_RSP));
     }
 
+	/**
+     * @brief 使用优惠劵
+     * <pre>
+     *  接受表单参数:
+     *      coupon_id   优惠劵ID
+     * </pre>
+     * @return 优惠劵详情
+     */
+    function redeem()
+    {
+        $couponid   = trim($this->input->get_post('coupon_id', TRUE));
+
+		$this->load->library('auth');
+        $userid = $this->auth->get_userid();
+        if (null === $userid)
+        {
+            $_RSP['ret'] = ERR_NO_SESSION;
+			$_RSP['msg'] = 'not logined yet';
+			exit(json_encode($_RSP));
+        }
+
+	}
+
     /**
      * @brief 详情查询
      * <pre>
      *  接受表单参数:
-     *      coupon_id   优惠劵详情
+     *      coupon_id   优惠劵ID
      * </pre>
      * @return 优惠劵详情
      */
