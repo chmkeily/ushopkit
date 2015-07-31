@@ -5,9 +5,9 @@
 */
 class Upload extends CI_Controller {
 
-    private var $_ufile_dir = '/data/ussd/img/u/';
-    private var $_ufile_path = '/img/u/';
-    private var $_ufile_domain = 'http://api.diaozhibao.com.cn/';
+    private $_ufile_dir = '/data/ussd/img/u/';
+    private $_ufile_path = '/img/u/';
+    private $_ufile_domain = 'http://api.diaozhibao.com.cn/';
 	
 	/**
 	* constructor
