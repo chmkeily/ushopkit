@@ -17,7 +17,7 @@ class Coupon extends CI_Controller {
 	}
 	
 	/**
-	* @brief 用户优惠卷查询(user_coupon)
+	* @brief 查询用户已领取的优惠券
 	*  <pre>
 	*	接受的表单数据：
 	*		start_idx	列表开始下标
