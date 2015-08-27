@@ -18,7 +18,7 @@ class User extends CI_Controller {
 	*  <pre>
 	*	接受的表单数据：
 	*		email				登录邮箱
-	*		secret				玩家秘钥+timestamp的MD5
+	*		secret				玩家秘钥+timestamp的MD5, 即secret = MD5(MD5(明文密码)+timestamp)
 	*		timestamp			当前时间戳(可能需要对时)
 	*		version				API版本(可选)
 	*  </pre>
@@ -75,7 +75,7 @@ class User extends CI_Controller {
 	*  <pre>
 	*	接受的表单数据：
 	*		email				登录邮箱
-	*		secret				秘钥约定(算法待定)
+	*		secret				秘钥约定(算法待定),注意：玩家秘钥 = MD5(明文密码)
 	*		name 				昵称
 	*		contact 			联系方式
 	*		version				API版本(可选)
