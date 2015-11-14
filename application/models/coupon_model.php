@@ -13,7 +13,8 @@ class Coupon_model extends CI_Model
             'coupon_begintime'      => 'BeginTime',
             'coupon_status'         => 'Status',
             'coupon_limitcnt'       => 'LimitCnt',
-            'coupon_tankencnt'      => 'TakenCnt',
+            'coupon_takencnt'       => 'TakenCnt',
+            'coupon_redeemcnt'      => 'RedeemCnt',
             'coupon_endtime'        => 'EndTime',
         );
 
@@ -81,6 +82,15 @@ class Coupon_model extends CI_Model
     function update_taken_count($coupon_id, $delta = 1)
     {
         $sql = 'update ' . $this->TableName . ' set TakenCnt=TakenCnt+' . $delta . ' where ID=' . $coupon_id;
+        return $this->db->query($sql);
+    }
+
+    /**
+    * @brief 增加优惠劵已领取计数
+    */
+    function update_redeem_count($coupon_id, $delta = 1)
+    {
+        $sql = 'update ' . $this->TableName . ' set RedeemCnt=RedeemCnt+' . $delta . ' where ID=' . $coupon_id;
         return $this->db->query($sql);
     }
 }

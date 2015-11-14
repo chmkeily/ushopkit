@@ -236,6 +236,10 @@ class Coupon extends CI_Controller {
         if (0 < $this->user_coupon_model->update($ucid, $updates))
         {
         	$_RSP['ret'] = SUCCEED;
+
+            //增加此优惠劵的使用/兑换计数
+            $couponid = $coupon['coupon_couponid'];
+            $this->coupon_model->update_redeem_count($couponid, 1);
         }
         else
         {

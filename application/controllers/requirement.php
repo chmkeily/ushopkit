@@ -143,6 +143,19 @@ class Requirement extends CI_Controller {
 		}
 		exit(json_encode($_RSP));
 	}
+
+	/**
+	* @brief 查询需求详情
+	*  <pre>
+	*	接受的表单数据：
+	*		rid		需求ID
+	*  </pre>
+	* @return 操作结果
+	*/
+	function details()
+	{
+
+	}
 }
 
 /* End of file requirement.php */
