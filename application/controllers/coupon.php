@@ -158,6 +158,7 @@ class Coupon extends CI_Controller {
 
         $usr_coupon = array(
             'coupon_couponid'   => $couponid,
+            'coupon_providername'   => $coupon['coupon_providername'],
             'coupon_userid'     => $userid,
             'coupon_title'      => $coupon['coupon_title'],
             'coupon_desc'       => $coupondesc,

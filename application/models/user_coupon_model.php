@@ -7,6 +7,7 @@ class User_coupon_model extends CI_Model
             'coupon_id'         => 'ID',
             'coupon_userid'     => 'UserID',
             'coupon_couponid'   => 'CouponID',
+            'coupon_providername' => 'ProviderName',
             'coupon_status'     => 'Status',
             'coupon_title'      => 'CouponTitle',
             'coupon_desc'       => 'CouponDesc',
