@@ -80,10 +80,10 @@ class Auth {
 	*/
 	function login($email, $secret2, $timestamp)
 	{
-		/*if (300 < abs($timestamp - time()))
+		if (300 < abs($timestamp - time()))
 		{
 			return FALSE;	//防止时间欺骗
-		}*/
+		}
 
 		///业务检验
 		$CI =& get_instance();

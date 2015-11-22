@@ -83,4 +83,18 @@ class User_coupon_model extends CI_Model
 
         return $this->db->affected_rows();
     }
+
+    /**
+     * @return favorite id or false
+     */
+    function check_coupon($userid, $couponid)
+    {
+        $row = $this->db->where('UserID', $userid)->where('CouponID', $couponid)->get($this->TableName)->row_array();
+        if (empty($row))
+        {
+            return false;
+        }
+
+        return $row['ID'];
+    }
 }

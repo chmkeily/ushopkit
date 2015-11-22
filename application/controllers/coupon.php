@@ -276,6 +276,49 @@ class Coupon extends CI_Controller {
         exit(json_encode($_RSP));
     }
 
+    /**
+    * @brief 查询用户是否已经领取某优惠劵
+    *  <pre>
+    *   接受的表单数据：
+    *       couponid    优惠劵id
+    *       userid      用户id (可选，默认为当前登陆用户)
+    *  </pre>
+    * @return 操作结果
+    * <pre>
+    *   {"ret":1,"ucid":"35"}
+    *   ret为0表示还没领取过，为1表示已经领取了，此时ucid表示领取的后台票号。
+    * </pre>
+    */
+    public function check()
+    {
+        $couponid    = trim($this->input->get_post('couponid', TRUE));
+        $userid     = trim($this->input->get_post('userid', TRUE));
+
+        if (empty($userid))
+        {
+            //若userid参数留空，则默认取当前登陆用户
+            $this->load->library('auth');
+            $userid = $this->auth->get_userid();
+            if (null === $userid)
+            {
+                $_RSP['ret'] = ERR_NO_SESSION;
+                $_RSP['msg'] = 'not logined yet';
+                exit(json_encode($_RSP));
+            }
+        }
+
+        $ucid = $this->user_coupon_model->check_coupon($userid, $couponid);
+        if (false === $ucid)
+        {
+            $_RSP['ret'] = 0;
+            exit(json_encode($_RSP));
+        }
+
+        $_RSP['ret'] = 1;
+        $_RSP['ucid'] = $ucid;
+        exit(json_encode($_RSP));
+    }
+
 }
 
 /* End of file coupon.php */
