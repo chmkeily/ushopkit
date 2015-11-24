@@ -88,6 +88,7 @@ class User extends CI_Controller {
 	function register()
 	{
 		$email		= trim($this->input->get_post('email', TRUE));
+		$phone		= trim($this->input->get_post('phone', TRUE));
 		$secret		= trim($this->input->get_post('secret', TRUE));
 		$name 		= trim($this->input->get_post('name', TRUE));
 		$contact	= trim($this->input->get_post('contact', TRUE));

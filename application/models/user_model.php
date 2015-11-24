@@ -6,6 +6,7 @@ class User_model extends CI_Model
     var $FieldMatrix = array(
             'user_id'       => 'ID',
             'user_email'    => 'Email',
+            'user_phone'    => 'Phone',
             'user_secret'   => 'Secret',
             'user_type'     => 'Type',
             'user_name'     => 'Name',
