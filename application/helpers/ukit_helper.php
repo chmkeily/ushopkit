@@ -57,5 +57,34 @@ if ( ! function_exists('XGETVAL'))
 	}
 }
 
+/**
+* ISEMAIL
+*	判断是否是合法的邮箱
+* @param string - $email
+* @return bool - false/true
+*/
+if ( ! function_exists('ISEMAIL'))
+{
+	function ISEMAIL(&$email)
+	{
+		return preg_match('/\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/', $email);
+	}
+}
+
+/**
+* ISMOBILE
+*	判断是否是合法的手机号码
+* @param string - $mobile
+* @return bool - false/true
+*/
+if ( ! function_exists('ISMOBILE'))
+{
+	function ISMOBILE(&$phone)
+	{
+		return preg_match('/1\d{10}/', $phone);
+	}
+}
+
+
 /* End of file ukit_helper.php */
 /* Location: ./application/helpers/ukit_helper.php */

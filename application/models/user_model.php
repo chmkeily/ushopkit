@@ -51,6 +51,20 @@ class User_model extends CI_Model
 
         return XFORMAT($row, $this->FieldMatrix, FALSE);
     }
+
+    /**
+    * @return array or FALSE
+    */
+    function get_user_by_phone($phone)
+    {
+        $row = $this->db->where('Phone', $phone)->get($this->TableName)->row_array();
+        if (empty($row))
+        {
+            return FALSE;
+        }
+
+        return XFORMAT($row, $this->FieldMatrix, FALSE);
+    }
 	
     /**
     * @return array or FALSE

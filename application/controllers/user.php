@@ -75,6 +75,7 @@ class User extends CI_Controller {
 	*  <pre>
 	*	接受的表单数据：
 	*		email				登录邮箱
+	*		phone 				登陆手机号 (email或phone至少要有一个)
 	*		secret				秘钥约定(算法待定),注意：玩家秘钥 = MD5(明文密码)
 	*		name 				昵称
 	*		contact 			联系方式
@@ -94,17 +95,26 @@ class User extends CI_Controller {
 		$contact	= trim($this->input->get_post('contact', TRUE));
 		$version	= trim($this->input->get_post('version', TRUE));
 
-		if (empty($email))
+		if (empty($email) && empty($phone))
 		{
 			$_RSP['ret'] = 101;
-			$_RSP['msg'] = 'mising param(s)';
+			$_RSP['msg'] = '需要提供邮箱或手机号！';
 			exit(json_encode($_RSP));
 		}
 
-		if (!preg_match('/\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/', $email))
+		//检查邮箱格式
+		if (!empty($email) && !preg_match('/\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/', $email))
 		{
 			$_RSP['ret'] = 100;
-			$_RSP['msg'] = 'invalid email';
+			$_RSP['msg'] = '邮箱不合法！';
+			exit(json_encode($_RSP));
+        }
+
+        //检查手机号码格式：匹配以1开头的长度为11的数字组合
+        if (!empty($phone) && !preg_match('/1\d{10}/', $phone))
+        {
+        	$_RSP['ret'] = 100;
+			$_RSP['msg'] = '手机号不合法！';
 			exit(json_encode($_RSP));
         }
 
@@ -121,6 +131,7 @@ class User extends CI_Controller {
 
 		$user = array(
 			'user_email' 	=> $email,
+			'user_phone'	=> $phone,
 			'user_secret'	=> $secret,
 			'user_name'		=> $name,
 			'user_contact'	=> $contact,
