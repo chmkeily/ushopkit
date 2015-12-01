@@ -23,7 +23,7 @@ class Coupon extends CI_Controller {
 	*		start_idx	列表开始下标
 	*		length		页大小/列表长度
 	*  </pre>
-	* @return 操作结果
+	* @return 操作结果 {2015-12-01 新增coupon_icon字段}
 	*/
 	public function mine()
 	{
@@ -160,6 +160,7 @@ class Coupon extends CI_Controller {
             'coupon_couponid'   => $couponid,
             'coupon_providername'   => $coupon['coupon_providername'],
             'coupon_userid'     => $userid,
+            'coupon_icon'      	=> $coupon['coupon_icon'],
             'coupon_title'      => $coupon['coupon_title'],
             'coupon_desc'       => $coupondesc,
             'coupon_obtaintime' => $timestamp,
